@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Semax | PEPTALYN</title>
+<title>Semax | BERYON</title>
 
 <style>
 
@@ -477,35 +477,57 @@ footer strong{
   }
 }
 
+
+/* =====================================================
+   CABECERA MAESTRA BERYON — UNIFICADA
+===================================================== */
+header{position:sticky;top:0;z-index:1000;background:#062543;border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 4px 18px rgba(0,0,0,.14);backdrop-filter:none;}
+.nav{width:100%;max-width:1540px;min-height:82px;margin:auto;padding:7px 26px;display:flex;align-items:center;justify-content:space-between;gap:18px;}
+.brand{width:230px;min-width:230px;display:flex;align-items:center;overflow:visible;background:transparent;border-radius:0;padding:0;flex-shrink:0;}
+.brand img{width:220px;height:62px;max-height:none;object-fit:contain;object-position:left center;transform:none;}
+.menu{display:flex;align-items:center;margin-left:auto;gap:18px;font-size:12.5px;font-weight:700;color:#fff;}
+.menu a{position:relative;white-space:nowrap;opacity:.96;transition:.2s;}
+.menu a:hover,.menu a.active{color:#62dcff;opacity:1;}
+.menu a.active::after{content:"";position:absolute;left:0;right:0;bottom:-12px;height:2px;background:#61d9fa;border-radius:8px;}
+.mobile-btn{display:none;width:48px;height:48px;align-items:center;justify-content:center;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:transparent;color:#fff;font-size:24px;cursor:pointer;}
+.cart-link{display:inline-flex !important;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:0 15px !important;border-radius:12px;background:linear-gradient(135deg,#22c4ed,#0789c5);color:#fff !important;box-shadow:0 8px 22px rgba(0,157,214,.30);font-weight:900 !important;transition:.2s;}
+.cart-link:hover{transform:translateY(-2px);background:linear-gradient(135deg,#35cff4,#0799d6);color:#fff !important;}
+.cart-link::after{display:none !important;}.cart-icon{font-size:18px;line-height:1;}
+@media(max-width:1250px) and (min-width:921px){.nav{padding:7px 14px;gap:10px}.brand{width:180px;min-width:180px}.brand img{width:172px;height:56px}.menu{gap:11px;font-size:11px}.cart-link{min-height:40px;padding:0 11px !important;gap:5px}.cart-icon{font-size:16px}}
+@media(max-width:920px){.nav{min-height:68px;padding:6px 12px}.brand{width:175px;min-width:175px}.brand img{width:170px;height:52px;transform:none}.mobile-btn{display:flex}.menu{display:none}.menu.open{display:flex;position:fixed;top:68px;left:12px;right:12px;flex-direction:column;align-items:stretch;gap:0;padding:14px;border-radius:15px;background:#032442;box-shadow:0 25px 70px rgba(0,0,0,.45);z-index:2000}.menu.open a{padding:14px 12px;border-bottom:1px solid rgba(255,255,255,.08)}.menu a.active::after{display:none}.menu.open .cart-link{margin-top:8px;min-height:48px;border-bottom:0}}
+/* =====================================================
+   FOOTER MAESTRO BERYON — UNIFICADO
+===================================================== */
+footer{background:#032442;color:#fff;border-top:0;text-align:initial;padding:0;font-size:initial;line-height:normal;}
+.footer-main{max-width:1450px;margin:auto;min-height:100px;padding:18px 28px;display:grid;grid-template-columns:260px 1fr auto;align-items:center;gap:30px;}
+.footer-logo img{width:245px;display:block;max-width:100%;}
+.footer-nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;font-size:12px;font-weight:700;}.footer-nav a:hover{color:#65d5f8;}
+.footer-social{display:flex;align-items:center;justify-content:flex-end;gap:9px;}.footer-social a{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(255,255,255,.25);font-weight:900;}.footer-social svg{width:19px;height:19px;display:block;}
+.footer-bottom{background:#fff;color:#244d77;min-height:70px;padding:17px 28px;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;gap:15px;font-size:11px;letter-spacing:1.25px;}.footer-bottom div:nth-child(2){text-align:center;font-family:"Brush Script MT",cursive;font-size:27px;letter-spacing:.5px;color:#0b3d76;}.footer-bottom div:last-child{text-align:right;}
+@media(max-width:920px){.footer-main{grid-template-columns:1fr;text-align:center}.footer-logo img{margin:auto}.footer-social{justify-content:center}.footer-bottom{grid-template-columns:1fr;text-align:center}.footer-bottom div:last-child{text-align:center}}
+@media(max-width:650px){.footer-main{padding:24px 18px;gap:22px}.footer-logo img{width:185px}.footer-nav{gap:14px 17px;font-size:11px}.footer-bottom{padding:16px 18px;font-size:9.5px;gap:12px}.footer-bottom div:nth-child(2){font-size:21px}}
+
 </style>
 </head>
 
 <body>
 
 <header>
-
 <div class="nav">
-
-  <a class="brand" href="index.html">
-    <img src="logo-peptalyn.png" alt="PEPTALYN">
-  </a>
-
-  <button class="mobile-btn" id="mobileButton">
-    ☰
-  </button>
-
-  <nav class="menu" id="menu">
-    <a href="index.html">Inicio</a>
-    <a href="areas.html">Áreas</a>
-    <a href="peptidos.html">Péptidos</a>
-    <a href="comparador.html">Comparador</a>
-    <a href="calculadora.html">Calculadora</a>
-    <a href="informacion.html">Información</a>
-    <a href="contacto.html">Contacto</a>
-  </nav>
-
+<a class="brand" href="index.html" aria-label="BERYON - Inicio"><img src="logo-beryon.png" alt="BERYON Advanced Peptide Research"></a>
+<button class="mobile-btn" id="mobileButton" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">☰</button>
+<nav class="menu" id="menu" aria-label="Navegación principal">
+<a href="index.html">Inicio</a>
+<a href="areas.html">Áreas</a>
+<a class="active" href="peptidos.html" aria-current="page">Péptidos</a>
+<a href="comparador.html">Comparador</a>
+<a href="calculadora.html">Calculadora</a>
+<a href="informacion.html">Información</a>
+<a href="contacto.html">Contacto</a>
+<a href="https://www.facebook.com/profile.php?id=61592075751226" target="_blank" rel="noopener noreferrer">Facebook</a>
+<a class="cart-link" href="comprar.html" aria-label="Comprar" title="Comprar"><span class="cart-icon" aria-hidden="true">🛒</span><span>Comprar</span></a>
+</nav>
 </div>
-
 </header>
 
 <div class="breadcrumb">
@@ -926,12 +948,17 @@ footer strong{
 
 
 <footer>
-
-  <strong>PEPTALYN</strong> · Advanced Peptide Research
-  <br>
-  Información científica y educativa.
-  El estado regulatorio de Semax varía según la jurisdicción.
-
+<div class="footer-main">
+<div class="footer-logo"><img src="logo-beryon.png" alt="BERYON Advanced Peptide Research"></div>
+<nav class="footer-nav" aria-label="Navegación del pie de página">
+<a href="index.html">Inicio</a><a href="areas.html">Áreas</a><a href="peptidos.html">Péptidos</a><a href="comprar.html">Comprar</a><a href="comparador.html">Comparador</a><a href="calculadora.html">Calculadora</a><a href="informacion.html">Información</a><a href="contacto.html">Contacto</a>
+</nav>
+<div class="footer-social">
+<a href="https://www.facebook.com/profile.php?id=61592075751226" target="_blank" rel="noopener noreferrer" aria-label="Visitar BERYON en Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 22v-9h3l.45-3h-3.45V8.1c0-.87.24-1.46 1.53-1.46H17V3.96c-.34-.05-1.5-.14-2.85-.14-2.82 0-4.75 1.72-4.75 4.88V10H6.2v3h3.2v9h4.1z"/></svg></a>
+<a href="#" class="social-placeholder" aria-label="WhatsApp BERYON - enlace próximamente" title="WhatsApp - próximamente" onclick="return false;"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.02 3C8.84 3 3 8.7 3 15.72c0 2.48.74 4.9 2.14 6.96L3.73 28l5.48-1.39a13.2 13.2 0 0 0 6.8 1.88h.01C23.2 28.49 29 22.78 29 15.76 29 8.72 23.2 3 16.02 3zm0 23.34h-.01a11.05 11.05 0 0 1-5.63-1.52l-.4-.24-3.25.83.87-3.09-.26-.41a10.53 10.53 0 0 1-1.69-5.7c0-5.88 4.66-10.66 10.38-10.66 5.72 0 10.37 4.79 10.37 10.67 0 5.88-4.66 10.66-10.38 10.66zm5.69-7.98c-.31-.15-1.84-.89-2.13-.99-.29-.1-.5-.15-.71.15-.21.3-.81.99-.99 1.19-.18.2-.37.22-.68.07-.31-.15-1.31-.47-2.49-1.5-.92-.8-1.54-1.79-1.72-2.09-.18-.3-.02-.46.14-.61.14-.14.31-.37.47-.56.16-.19.21-.32.31-.52.1-.2.05-.38-.03-.53-.08-.15-.71-1.67-.97-2.29-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.38-.29.3-1.1 1.05-1.1 2.56 0 1.51 1.13 2.97 1.29 3.17.16.2 2.22 3.31 5.38 4.64.75.32 1.34.51 1.8.65.76.23 1.45.2 1.99.12.61-.09 1.84-.74 2.1-1.45.26-.72.26-1.33.18-1.46-.08-.13-.29-.2-.6-.35z"/></svg></a>
+<a href="#" class="social-placeholder" aria-label="Correo electrónico BERYON - próximamente" title="Correo electrónico - próximamente" onclick="return false;"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm9 7.1L20.2 7H3.8L12 12.1zM3 17h18V9.1l-8.47 5.27a1 1 0 0 1-1.06 0L3 9.1V17z"/></svg></a>
+</div></div>
+<div class="footer-bottom"><div>PÉPTIDOS &nbsp; | &nbsp; CIENCIA &nbsp; | &nbsp; INVESTIGACIÓN &nbsp; | &nbsp; LONGEVIDAD</div><div>Una marca nacida de una promesa</div><div>ECUADOR &nbsp; | &nbsp; PARA UN MUNDO MÁS SALUDABLE</div></div>
 </footer>
 
 
