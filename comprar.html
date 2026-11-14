@@ -1141,5 +1141,93 @@ function render(){
 buttons.forEach(btn=>btn.addEventListener("click",()=>{activeFilter=btn.dataset.filter;buttons.forEach(b=>{const on=b===btn;b.classList.toggle("active",on);b.setAttribute("aria-pressed",String(on));});render();}));
 search.addEventListener("input",render);render();
 </script>
+  <script>
+/* ===== SELECTORES DE PRESENTACIÓN BERYON ===== */
+
+document.addEventListener("click", function(event){
+
+  /* CAMBIO DE PRESENTACIÓN */
+  const option = event.target.closest(".presentation-option");
+
+  if(option){
+
+    const selector = option.closest(".presentation-selector");
+    const card = option.closest(".card");
+
+    selector.querySelectorAll(".presentation-option").forEach(btn => {
+      btn.classList.remove("active");
+    });
+
+    option.classList.add("active");
+
+    const product = option.dataset.product || "";
+    const presentation = option.dataset.presentation || "";
+    const stock = option.dataset.stock || "disponible";
+    const reference = option.dataset.reference || "";
+
+    const stockBox = selector.querySelector(".stock-display");
+    const stockText = selector.querySelector(".stock-text");
+    const doseReference = selector.querySelector(".dose-reference");
+
+    const consultButton = card.querySelector(".consult-product");
+
+    if(doseReference && reference){
+      doseReference.innerHTML =
+        'Referencia de presentación: <strong>' + reference + '</strong>';
+    }
+
+    if(consultButton){
+      consultButton.dataset.product = product;
+      consultButton.dataset.presentation = presentation;
+    }
+
+    if(stock === "agotado"){
+
+      if(stockBox) stockBox.classList.add("out");
+      if(stockText) stockText.textContent = "Agotado";
+
+      if(consultButton){
+        consultButton.disabled = true;
+        consultButton.textContent = "Agotado";
+      }
+
+    } else {
+
+      if(stockBox) stockBox.classList.remove("out");
+      if(stockText) stockText.textContent = "Disponible";
+
+      if(consultButton){
+        consultButton.disabled = false;
+        consultButton.textContent = "Consultar disponibilidad";
+      }
+    }
+
+    return;
+  }
+
+
+  /* CONSULTAR POR WHATSAPP */
+  const consultButton = event.target.closest(".consult-product");
+
+  if(consultButton){
+
+    if(consultButton.disabled) return;
+
+    const product = consultButton.dataset.product || "";
+    const presentation = consultButton.dataset.presentation || "";
+
+    const message =
+      "Hola, quisiera consultar disponibilidad de " +
+      product + " " + presentation + " en BERYON.";
+
+    const url =
+      "https://wa.me/593998833543?text=" +
+      encodeURIComponent(message);
+
+    window.open(url, "_blank");
+  }
+
+});
+</script>
 </body>
 </html>
