@@ -424,7 +424,105 @@ text-shadow:0 2px 12px rgba(0,0,0,.45);
 background-position:58% center !important;
 }
 }
+/* ===== SELECTOR DE PRESENTACIONES BERYON ===== */
 
+.presentation-selector{
+  margin-top:18px;
+}
+
+.presentation-selector > strong{
+  display:block;
+  margin-bottom:10px;
+  font-size:15px;
+  color:#ffffff;
+}
+
+.presentation-options{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:4px 2px 10px;
+  scrollbar-width:thin;
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+}
+
+.presentation-options::-webkit-scrollbar{
+  height:5px;
+}
+
+.presentation-options::-webkit-scrollbar-thumb{
+  background:rgba(94,224,255,.45);
+  border-radius:20px;
+}
+
+.presentation-option{
+  flex:0 0 auto;
+  min-width:70px;
+  padding:10px 15px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.07);
+  color:#dbe7f4;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.presentation-option:hover{
+  border-color:#5ee0ff;
+  background:rgba(94,224,255,.12);
+}
+
+.presentation-option.active{
+  color:#06182c;
+  background:linear-gradient(135deg,#5ee0ff,#65b9ff);
+  border-color:transparent;
+  box-shadow:0 5px 18px rgba(94,224,255,.25);
+}
+
+.stock-display{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:8px;
+  font-size:14px;
+  font-weight:700;
+}
+
+.stock-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#48e38a;
+  box-shadow:0 0 10px rgba(72,227,138,.7);
+}
+
+.stock-display.out .stock-dot{
+  background:#ff6262;
+  box-shadow:0 0 10px rgba(255,98,98,.6);
+}
+
+.stock-display.out .stock-text{
+  color:#ff8b8b;
+}
+
+.dose-reference{
+  margin-top:10px;
+  padding:9px 12px;
+  border-radius:10px;
+  background:rgba(94,224,255,.07);
+  border:1px solid rgba(94,224,255,.15);
+  color:#cfe9f5;
+  font-size:13px;
+}
+
+.consult-product:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+  filter:grayscale(.7);
+}
 </style>
 </head>
 <body>
@@ -926,7 +1024,87 @@ Facebook
 <div>ECUADOR | PARA UN MUNDO MÁS SALUDABLE</div>
 </div>
 </footer>
+/* ===== PRESENTACIONES BERYON ===== */
 
+document.querySelectorAll(".presentation-selector").forEach(selector => {
+
+  const options = selector.querySelectorAll(".presentation-option");
+  const card = selector.closest(".card");
+  const consultButton = card.querySelector(".consult-product");
+  const stockBox = selector.querySelector(".stock-display");
+  const stockText = selector.querySelector(".stock-text");
+  const doseReference = selector.querySelector(".dose-reference");
+
+  options.forEach(option => {
+
+    option.addEventListener("click", () => {
+
+      options.forEach(btn => btn.classList.remove("active"));
+      option.classList.add("active");
+
+      const product = option.dataset.product;
+      const presentation = option.dataset.presentation;
+      const stock = option.dataset.stock;
+      const reference = option.dataset.reference;
+
+      if(consultButton){
+        consultButton.dataset.product = product;
+        consultButton.dataset.presentation = presentation;
+      }
+
+      if(doseReference && reference){
+        doseReference.innerHTML =
+          `Referencia de presentación: <strong>${reference}</strong>`;
+      }
+
+      if(stock === "agotado"){
+
+        stockBox.classList.add("out");
+        stockText.textContent = "Agotado";
+
+        if(consultButton){
+          consultButton.disabled = true;
+          consultButton.textContent = "Agotado";
+        }
+
+      }else{
+
+        stockBox.classList.remove("out");
+        stockText.textContent = "Disponible";
+
+        if(consultButton){
+          consultButton.disabled = false;
+          consultButton.textContent = "Consultar disponibilidad";
+        }
+      }
+
+    });
+
+  });
+
+});
+
+
+document.querySelectorAll(".consult-product").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    if(button.disabled) return;
+
+    const product = button.dataset.product;
+    const presentation = button.dataset.presentation;
+
+    const message =
+      `Hola, quisiera consultar disponibilidad de ${product} ${presentation} en BERYON.`;
+
+    window.open(
+      `https://wa.me/593998833543?text=${encodeURIComponent(message)}`,
+      "_blank"
+    );
+
+  });
+
+});
 <script>
 const WHATSAPP="593998833543";
 const mobileButton=document.getElementById("mobileButton");
