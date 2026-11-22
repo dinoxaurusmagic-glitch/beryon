@@ -50,3 +50,29 @@ h1{font-weight:800}
   background:rgba(98,220,255,.12);
   border-color:rgba(98,220,255,.55);
 }
+
+/* Enlaces legales del pie de página */
+.footer-legal{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px 22px;
+  padding:12px 20px 16px;
+  font-size:12px;
+  color:#a9c6de;
+}
+
+.footer-legal a{
+  color:#a9c6de;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+
+.footer-legal a:hover{
+  color:#62dcff;
+}
+
+.notice-inner a{
+  color:#8feaff;
+  text-decoration:underline;
+}
