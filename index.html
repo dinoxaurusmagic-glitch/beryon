@@ -1799,6 +1799,86 @@ document.addEventListener("keydown", function (event) {
 
 </script>
 
+
+<!-- ============ CHATBOT INFORMATIVO BERYON ============ -->
+<style>
+#bb-open{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;border:0;background:linear-gradient(135deg,#22c4ed,#0789c5);color:#fff;font-size:26px;cursor:pointer;z-index:3000;box-shadow:0 8px 22px rgba(0,0,0,.3)}
+#bb-chat{position:fixed;right:18px;bottom:86px;width:min(360px,calc(100vw - 36px));height:460px;background:#fff;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.35);display:flex;flex-direction:column;overflow:hidden;z-index:3000;font-family:Arial,sans-serif}
+#bb-chat[hidden],#bb-open[hidden]{display:none}
+#bb-head{background:#062543;color:#fff;padding:12px 14px;font-weight:700;font-size:14px}
+#bb-log{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:8px;font-size:14px}
+.bb-m{max-width:85%;padding:9px 12px;border-radius:12px;line-height:1.4;white-space:pre-wrap}
+.bb-u{align-self:flex-end;background:#0789c5;color:#fff}
+.bb-b{align-self:flex-start;background:#eef5f9;color:#09234a}
+#bb-note{font-size:11px;color:#617991;padding:0 12px 6px}
+#bb-form{display:flex;border-top:1px solid #dce8ef}
+#bb-in{flex:1;border:0;padding:12px;font-size:14px;outline:none}
+#bb-send{border:0;background:#062543;color:#fff;padding:0 16px;cursor:pointer;font-weight:700}
+</style>
+
+<button id="bb-open" aria-label="Abrir chat">💬</button>
+<div id="bb-chat" hidden>
+  <div id="bb-head">Asistente BERYON</div>
+  <div id="bb-log" aria-live="polite"></div>
+  <div id="bb-note">Información educativa. No sustituye la valoración médica.</div>
+  <form id="bb-form">
+    <input id="bb-in" placeholder="Escribe tu pregunta..." maxlength="500" autocomplete="off" aria-label="Escribe tu pregunta">
+    <button id="bb-send">Enviar</button>
+  </form>
+</div>
+
+<script>
+(function () {
+  var URL_EXEC = "PEGA_AQUI_LA_URL_EXEC";
+  var open = document.getElementById("bb-open"),
+      box = document.getElementById("bb-chat"),
+      log = document.getElementById("bb-log"),
+      form = document.getElementById("bb-form"),
+      input = document.getElementById("bb-in"),
+      msgs = [];
+
+  if (URL_EXEC.indexOf("PEGA_AQUI") === 0) { open.hidden = true; return; }
+
+  function add(text, who) {
+    var d = document.createElement("div");
+    d.className = "bb-m " + (who === "u" ? "bb-u" : "bb-b");
+    d.textContent = text;
+    log.appendChild(d);
+    log.scrollTop = log.scrollHeight;
+    return d;
+  }
+
+  open.onclick = function () {
+    box.hidden = !box.hidden;
+    if (!box.hidden && !log.children.length)
+      add("Hola, soy el asistente informativo de BERYON. ¿Qué te gustaría saber?", "b");
+  };
+
+  form.onsubmit = function (e) {
+    e.preventDefault();
+    var t = input.value.trim();
+    if (!t) return;
+    input.value = "";
+    add(t, "u");
+    msgs.push({ role: "user", text: t });
+    var wait = add("...", "b");
+    fetch(URL_EXEC, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ messages: msgs })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        wait.textContent = j.reply;
+        msgs.push({ role: "model", text: j.reply });
+      })
+      .catch(function () { wait.textContent = "No pude conectarme. Intenta de nuevo."; });
+  };
+})();
+</script>
+<!-- ============ FIN CHATBOT ============ -->
+
 </body>
 </html>
+
 
