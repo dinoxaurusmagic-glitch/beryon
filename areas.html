@@ -830,7 +830,7 @@ linear-gradient(
 rgba(3,31,59,.91),
 rgba(4,44,78,.56)
 ),
-url("beryon-areas-hero.png?v=2")
+url("beryon-areas-hero-v2.png")
 center / cover no-repeat;
 }
  
@@ -1124,12 +1124,27 @@ height:19px;
 display:block;
 }
  
+.skip-link{
+position:absolute;
+left:-9999px;
+top:0;
+z-index:2000;
+background:#fff;
+color:#062543;
+padding:12px 18px;
+font-weight:700;
+border-radius:0 0 8px 0;
+}
+
+.skip-link:focus{left:0}
+
 </style>
  
 </head>
  
  
 <body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
  
  
 <header>
@@ -1217,7 +1232,9 @@ Facebook
 </header>
  
  
-<section class="hero">
+<main id="contenido">
+
+<section class="hero" aria-labelledby="hero-title">
  
 <div class="hero-inner">
  
@@ -1227,7 +1244,7 @@ Facebook
 ÁREAS DE INVESTIGACIÓN
 </div>
  
-<h1>
+<h1 id="hero-title">
 CIENCIA PARA
 <span>UNA VIDA MEJOR</span>
 </h1>
@@ -1243,7 +1260,7 @@ Explora nuestras áreas y descubre cómo se organiza la información científica
 </section>
  
  
-<main class="areas-section">
+<div class="areas-section">
  
 <div class="section-head">
  
@@ -1269,7 +1286,7 @@ Selecciona un área para acceder directamente a las moléculas relacionadas con 
 class="area-card"
 href="peptidos.html?area=metabolismo">
  
-<div class="area-image metabolismo"></div>
+<div class="area-image metabolismo" aria-hidden="true"></div>
  
 <div class="area-body">
  
@@ -1298,7 +1315,7 @@ Explorar metabolismo →
 class="area-card"
 href="peptidos.html?area=rendimiento">
  
-<div class="area-image rendimiento"></div>
+<div class="area-image rendimiento" aria-hidden="true"></div>
  
 <div class="area-body">
  
@@ -1311,7 +1328,7 @@ Investigación relacionada con función física, energía, adaptación fisiológ
 </p>
  
 <div class="examples">
-MOTS-C · Ipamorelin · Tesamorelin · NAD+
+MOTS-c · Ipamorelin · Tesamorelin · NAD+
 </div>
  
 <div class="area-link">
@@ -1327,7 +1344,7 @@ Explorar rendimiento →
 class="area-card"
 href="peptidos.html?area=recuperacion">
  
-<div class="area-image recuperacion"></div>
+<div class="area-image recuperacion" aria-hidden="true"></div>
  
 <div class="area-body">
  
@@ -1356,7 +1373,7 @@ Explorar recuperación →
 class="area-card"
 href="peptidos.html?area=neurociencia">
  
-<div class="area-image neurociencia"></div>
+<div class="area-image neurociencia" aria-hidden="true"></div>
  
 <div class="area-body">
  
@@ -1385,7 +1402,7 @@ Explorar neurociencia →
 class="area-card"
 href="peptidos.html?area=piel">
  
-<div class="area-image piel"></div>
+<div class="area-image piel" aria-hidden="true"></div>
  
 <div class="area-body">
  
@@ -1414,7 +1431,7 @@ Explorar piel →
 class="area-card"
 href="peptidos.html?area=longevidad">
  
-<div class="area-image longevidad"></div>
+<div class="area-image longevidad" aria-hidden="true"></div>
  
 <div class="area-body">
  
@@ -1427,7 +1444,7 @@ Investigación centrada en metabolismo celular, bioenergética, función mitocon
 </p>
  
 <div class="examples">
-MOTS-C · NAD+
+MOTS-c · NAD+
 </div>
  
 <div class="area-link">
@@ -1441,7 +1458,7 @@ Explorar longevidad →
  
 </div>
  
-</main>
+</div>
  
  
 <section class="purpose">
@@ -1480,8 +1497,9 @@ VER PÉPTIDOS →
 </a>
  
 </section>
- 
- 
+
+</main>
+
 <footer>
  
 <div class="footer-main">
@@ -1525,28 +1543,6 @@ aria-label="Visitar BERYON en Facebook"
 title="Facebook">
 <svg viewBox="0 0 24 24" aria-hidden="true">
 <path fill="currentColor" d="M13.5 22v-9h3l.45-3h-3.45V8.1c0-.87.24-1.46 1.53-1.46H17V3.96c-.34-.05-1.5-.14-2.85-.14-2.82 0-4.75 1.72-4.75 4.88V10H6.2v3h3.2v9h4.1z"/>
-</svg>
-</a>
- 
-<a
-href="#"
-class="social-placeholder"
-aria-label="WhatsApp BERYON - enlace próximamente"
-title="WhatsApp - próximamente"
-onclick="return false;">
-<svg viewBox="0 0 32 32" aria-hidden="true">
-<path fill="currentColor" d="M16.02 3C8.84 3 3 8.7 3 15.72c0 2.48.74 4.9 2.14 6.96L3.73 28l5.48-1.39a13.2 13.2 0 0 0 6.8 1.88h.01C23.2 28.49 29 22.78 29 15.76 29 8.72 23.2 3 16.02 3zm0 23.34h-.01a11.05 11.05 0 0 1-5.63-1.52l-.4-.24-3.25.83.87-3.09-.26-.41a10.53 10.53 0 0 1-1.69-5.7c0-5.88 4.66-10.66 10.38-10.66 5.72 0 10.37 4.79 10.37 10.67 0 5.88-4.66 10.66-10.38 10.66zm5.69-7.98c-.31-.15-1.84-.89-2.13-.99-.29-.1-.5-.15-.71.15-.21.3-.81.99-.99 1.19-.18.2-.37.22-.68.07-.31-.15-1.31-.47-2.49-1.5-.92-.8-1.54-1.79-1.72-2.09-.18-.3-.02-.46.14-.61.14-.14.31-.37.47-.56.16-.19.21-.32.31-.52.1-.2.05-.38-.03-.53-.08-.15-.71-1.67-.97-2.29-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.38-.29.3-1.1 1.05-1.1 2.56 0 1.51 1.13 2.97 1.29 3.17.16.2 2.22 3.31 5.38 4.64.75.32 1.34.51 1.8.65.76.23 1.45.2 1.99.12.61-.09 1.84-.74 2.1-1.45.26-.72.26-1.33.18-1.46-.08-.13-.29-.2-.6-.35z"/>
-</svg>
-</a>
- 
-<a
-href="#"
-class="social-placeholder"
-aria-label="Correo electrónico BERYON - próximamente"
-title="Correo electrónico - próximamente"
-onclick="return false;">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path fill="currentColor" d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm9 7.1L20.2 7H3.8L12 12.1zM3 17h18V9.1l-8.47 5.27a1 1 0 0 1-1.06 0L3 9.1V17z"/>
 </svg>
 </a>
  
@@ -1673,3 +1669,4 @@ mobileButton.focus();
 </body>
  
 </html>
+
