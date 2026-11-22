@@ -151,18 +151,40 @@ header{
 ===================================================== */
 .info-visual-beryon{
   width:100%;
-  max-width:100%;
   overflow:hidden;
   background:#06182c;
+  display:grid;
+  gap:6px;
 }
-.info-visual-beryon img{
-  display:block;
-  width:100%;
-  max-width:100%;
-  height:auto;
-  margin:0 auto;
-  object-fit:cover;
-  object-position:center;
+.ib{
+  position:relative;
+  min-height:230px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:24px;
+  padding:38px clamp(20px,5vw,72px);
+  color:#fff;
+  background-color:#0a2a4d;
+  background-repeat:no-repeat;
+  background-size:auto 100%,cover;
+  background-position:center,62% center;
+}
+.ib-1{background-image:linear-gradient(90deg,#062140 0%,rgba(6,33,64,.92) 28%,rgba(6,33,64,.25) 58%,rgba(6,33,64,.85) 100%),url("beryon-info-laboratorio.webp")}
+.ib-2{background-image:linear-gradient(90deg,#062140 0%,rgba(6,33,64,.92) 28%,rgba(6,33,64,.2) 58%,rgba(6,33,64,.85) 100%),url("beryon-info-moleculas.webp")}
+.ib-3{background-image:linear-gradient(90deg,#062140 0%,rgba(6,33,64,.92) 28%,rgba(6,33,64,.25) 58%,rgba(6,33,64,.85) 100%),url("beryon-info-calidad.webp")}
+.ib-kicker{font-size:12px;font-weight:700;letter-spacing:4px;color:#5fd8fb;text-transform:uppercase;margin-bottom:10px}
+.ib-title{font-family:"Montserrat","Inter",Arial,sans-serif;font-size:clamp(24px,3vw,38px);font-weight:700;line-height:1.12;max-width:480px}
+.ib-line{width:46px;height:2px;background:#5fd8fb;margin:16px 0 12px}
+.ib-sub{font-size:12px;letter-spacing:3px;color:rgba(255,255,255,.82);text-transform:uppercase}
+.ib-tags{list-style:none;margin:0;padding:0;display:grid;gap:9px;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.9);text-align:left}
+@media(max-width:700px){
+  .ib{grid-template-columns:1fr;min-height:200px;padding:26px 20px;background-position:center,center}
+  .ib-1,.ib-2,.ib-3{background-size:100% 100%,cover}
+  .ib-1{background-image:linear-gradient(180deg,rgba(6,33,64,.55),rgba(6,33,64,.92)),url("beryon-info-laboratorio.webp")}
+  .ib-2{background-image:linear-gradient(180deg,rgba(6,33,64,.55),rgba(6,33,64,.92)),url("beryon-info-moleculas.webp")}
+  .ib-3{background-image:linear-gradient(180deg,rgba(6,33,64,.55),rgba(6,33,64,.92)),url("beryon-info-calidad.webp")}
+  .ib-tags{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:10.5px}
 }
 
 /* =====================================================
@@ -350,7 +372,8 @@ footer{border-top:1px solid rgba(255,255,255,.08);background:#032442;color:#fff;
 }
 </style>
 
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo-marca.css">
 </head>
 <body>
 <a class="skip" href="#contenido">Saltar al contenido</a>
@@ -440,9 +463,37 @@ Facebook
  
 </header>
 <main id="contenido">
-   <section class="info-visual-beryon" aria-label="Investigación, péptidos y calidad BERYON">
-  <img src="beryon-informacion-ciencia.webp"
-       alt="BERYON: investigación científica, péptidos y análisis de calidad">
+<section class="info-visual-beryon" aria-label="Investigación, péptidos y calidad BERYON">
+
+<div class="ib ib-1">
+<div>
+<p class="ib-kicker">BERYON · Advanced Peptide Research</p>
+<p class="ib-title">Ciencia hoy para un mañana más saludable</p>
+<div class="ib-line" aria-hidden="true"></div>
+</div>
+<ul class="ib-tags"><li>Investigación</li><li>Conocimiento</li><li>Bienestar</li></ul>
+</div>
+
+<div class="ib ib-2">
+<div>
+<p class="ib-kicker">Péptidos</p>
+<p class="ib-title">Pequeñas moléculas con un gran potencial</p>
+<div class="ib-line" aria-hidden="true"></div>
+<p class="ib-sub">Ciencia · Evidencia · Aplicaciones</p>
+</div>
+<ul class="ib-tags"><li>Investigar</li><li>Comprender</li><li>Aplicar</li></ul>
+</div>
+
+<div class="ib ib-3">
+<div>
+<p class="ib-kicker">Calidad</p>
+<p class="ib-title">Evidencia que genera confianza</p>
+<div class="ib-line" aria-hidden="true"></div>
+<p class="ib-sub">Identidad · Pureza · Trazabilidad</p>
+</div>
+<ul class="ib-tags"><li>COA</li><li>Análisis</li><li>Estándares</li><li>Buenas prácticas</li></ul>
+</div>
+
 </section>
 <section class="hero"><div class="eyebrow">BERYON · INFORMACIÓN CIENTÍFICA</div><h1>Calidad, documentación y <span>evidencia</span></h1><p>Una guía práctica para interpretar COA, identidad, pureza, potencia, trazabilidad, almacenamiento, evidencia científica y situación regulatoria sin confundir documentación analítica con aprobación sanitaria.</p></section>
 <div class="wrap">
@@ -529,27 +580,7 @@ title="Facebook">
 </svg>
 </a>
  
-<a
-href="#"
-class="social-placeholder"
-aria-label="WhatsApp BERYON - enlace próximamente"
-title="WhatsApp - próximamente"
-onclick="return false;">
-<svg viewBox="0 0 32 32" aria-hidden="true">
-<path fill="currentColor" d="M16.02 3C8.84 3 3 8.7 3 15.72c0 2.48.74 4.9 2.14 6.96L3.73 28l5.48-1.39a13.2 13.2 0 0 0 6.8 1.88h.01C23.2 28.49 29 22.78 29 15.76 29 8.72 23.2 3 16.02 3zm0 23.34h-.01a11.05 11.05 0 0 1-5.63-1.52l-.4-.24-3.25.83.87-3.09-.26-.41a10.53 10.53 0 0 1-1.69-5.7c0-5.88 4.66-10.66 10.38-10.66 5.72 0 10.37 4.79 10.37 10.67 0 5.88-4.66 10.66-10.38 10.66zm5.69-7.98c-.31-.15-1.84-.89-2.13-.99-.29-.1-.5-.15-.71.15-.21.3-.81.99-.99 1.19-.18.2-.37.22-.68.07-.31-.15-1.31-.47-2.49-1.5-.92-.8-1.54-1.79-1.72-2.09-.18-.3-.02-.46.14-.61.14-.14.31-.37.47-.56.16-.19.21-.32.31-.52.1-.2.05-.38-.03-.53-.08-.15-.71-1.67-.97-2.29-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.38-.29.3-1.1 1.05-1.1 2.56 0 1.51 1.13 2.97 1.29 3.17.16.2 2.22 3.31 5.38 4.64.75.32 1.34.51 1.8.65.76.23 1.45.2 1.99.12.61-.09 1.84-.74 2.1-1.45.26-.72.26-1.33.18-1.46-.08-.13-.29-.2-.6-.35z"/>
-</svg>
-</a>
- 
-<a
-href="#"
-class="social-placeholder"
-aria-label="Correo electrónico BERYON - próximamente"
-title="Correo electrónico - próximamente"
-onclick="return false;">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path fill="currentColor" d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm9 7.1L20.2 7H3.8L12 12.1zM3 17h18V9.1l-8.47 5.27a1 1 0 0 1-1.06 0L3 9.1V17z"/>
-</svg>
-</a>
+<a href="contacto.html" aria-label="Escribir a BERYON por WhatsApp" title="WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.02 3C8.84 3 3 8.7 3 15.72c0 2.48.74 4.9 2.14 6.96L3.73 28l5.48-1.39a13.2 13.2 0 0 0 6.8 1.88h.01C23.2 28.49 29 22.78 29 15.76 29 8.72 23.2 3 16.02 3zm0 23.34h-.01a11.05 11.05 0 0 1-5.63-1.52l-.4-.24-3.25.83.87-3.09-.26-.41a10.53 10.53 0 0 1-1.69-5.7c0-5.88 4.66-10.66 10.38-10.66 5.72 0 10.37 4.79 10.37 10.67 0 5.88-4.66 10.66-10.38 10.66zm5.69-7.98c-.31-.15-1.84-.89-2.13-.99-.29-.1-.5-.15-.71.15-.21.3-.81.99-.99 1.19-.18.2-.37.22-.68.07-.31-.15-1.31-.47-2.49-1.5-.92-.8-1.54-1.79-1.72-2.09-.18-.3-.02-.46.14-.61.14-.14.31-.37.47-.56.16-.19.21-.32.31-.52.1-.2.05-.38-.03-.53-.08-.15-.71-1.67-.97-2.29-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.38-.29.3-1.1 1.05-1.1 2.56 0 1.51 1.13 2.97 1.29 3.17.16.2 2.22 3.31 5.38 4.64.75.32 1.34.51 1.8.65.76.23 1.45.2 1.99.12.61-.09 1.84-.74 2.1-1.45.26-.72.26-1.33.18-1.46-.08-.13-.29-.2-.6-.35z"/></svg></a>
  
 </div>
  

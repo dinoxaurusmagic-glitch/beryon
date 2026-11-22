@@ -1,0 +1,52 @@
+/* =====================================================
+   ESTILO DE MARCA BERYON
+   Se carga al final del <head> en todas las páginas para
+   unificar letras y pie de página sin tocar cada diseño.
+===================================================== */
+
+/* Letras: Inter para leer, Montserrat para títulos (combina con el logo) */
+body{
+  font-family:"Inter",Arial,Helvetica,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+input,select,textarea,button{font-family:inherit}
+
+h1,h2,h3,h4{
+  font-family:"Montserrat","Inter",Arial,sans-serif;
+  letter-spacing:-.01em;
+}
+
+h1{font-weight:800}
+
+/* Menú y botones con la misma letra de los títulos */
+.menu,
+.hero-btn,
+.outline-btn,
+.cart-link,
+.btn{
+  font-family:"Montserrat","Inter",Arial,sans-serif;
+}
+
+/* Pie de página: franja inferior oscura en todas las páginas */
+.footer-bottom{
+  background:#021b33;
+  color:#a9c6de;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.footer-bottom div:nth-child(2),
+.footer-bottom .script{
+  color:#7fdcff;
+}
+
+.footer-social a{
+  color:#fff;
+  transition:background .2s,border-color .2s;
+}
+
+.footer-social a:hover{
+  background:rgba(98,220,255,.12);
+  border-color:rgba(98,220,255,.55);
+}
