@@ -564,10 +564,12 @@ PARA UN MUNDO MÁS SALUDABLE
 const molecule=document.getElementById("molecule");
 const customName=document.getElementById("customName");
 molecule.addEventListener("change",()=>{customName.style.display=molecule.value==="Otro"?"block":"none";if(molecule.value!=="Otro")customName.value="";});
+function clearResult(){["resultName","concentration","volume","units","relation"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent="—"})}
+["mg","ml","target","molecule","customName"].forEach(id=>{const el=document.getElementById(id);if(el){el.addEventListener("input",clearResult);el.addEventListener("change",clearResult)}})
 function cleanNumber(n,decimals=4){return n.toFixed(decimals).replace(/0+$/,"").replace(/\.$/,"");}
 document.getElementById("calculate").addEventListener("click",()=>{
  const mg=parseFloat(document.getElementById("mg").value),ml=parseFloat(document.getElementById("ml").value),target=parseFloat(document.getElementById("target").value),error=document.getElementById("error");
- if(!(mg>0&&ml>0&&target>0)){error.style.display="block";return;} error.style.display="none";
+ if(!(mg>0&&ml>0&&target>0)){error.style.display="block";clearResult();return;} error.style.display="none";
  const concentration=mg/ml,volume=target/concentration,units=volume*100,mgPerUnit=concentration/100;
  const selectedName=molecule.value==="Otro"?(customName.value.trim()||"Otro"):molecule.value;
  document.getElementById("resultName").textContent=selectedName;
