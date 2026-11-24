@@ -18,14 +18,27 @@
   }
   window.BERYON_precio = precio;
 
+  // ¿Es la presentación que se regala con cada pedido?
+  function esRegalo(producto, presentacion) {
+    var p = C.precios && C.precios[producto];
+    return !!p && p[presentacion] === "incluida";
+  }
+  var R = C.regalo || null;
+  function hayRegalo() { return !!(R && R.texto); }
+
   // Mensaje de WhatsApp para pedir un producto
   window.BERYON_mensajePedido = function (producto, presentacion) {
     var v = precio(producto, presentacion);
     var formas = ["transferencia"];
     if (C.pagos && C.pagos.payphone) formas.push("tarjeta (Payphone)");
     if (C.pagos && C.pagos.contraEntregaCiudad) formas.push("contra entrega en " + C.pagos.contraEntregaCiudad);
+    if (esRegalo(producto, presentacion)) {
+      return "Hola, tengo una consulta sobre el " + producto.toLowerCase() + " " + presentacion +
+        " que viene de regalo con los pedidos de BERYON.";
+    }
+    var extra = hayRegalo() && producto !== R.producto ? " + " + R.texto.charAt(0).toLowerCase() + R.texto.slice(1) : "";
     var linea = v
-      ? "Hola, quiero pedir " + producto + " " + presentacion + " (" + fmt(v) + ", envío incluido) en BERYON."
+      ? "Hola, quiero pedir " + producto + " " + presentacion + " (" + fmt(v) + ", envío incluido" + extra + ") en BERYON."
       : "Hola, quisiera consultar disponibilidad y precio de " + producto + " " + presentacion + " en BERYON.";
     return linea + "\n\nCiudad de entrega: \nForma de pago (" + formas.join(" / ") + "): ";
   };
@@ -42,12 +55,18 @@
       var stock = card.querySelector(".stock-display");
       (stock || activa.parentNode).insertAdjacentElement("afterend", caja);
     }
-    var v = precio(activa.dataset.product, activa.dataset.presentation);
+    var prod = activa.dataset.product, pres = activa.dataset.presentation;
+    var v = precio(prod, pres);
+    var regaloAqui = hayRegalo() && prod !== R.producto;
     if (activa.dataset.stock === "agotado") {
       caja.innerHTML = '<span class="price-muted">Presentación agotada</span>';
+    } else if (esRegalo(prod, pres)) {
+      caja.innerHTML = '<span class="price-value price-free">Gratis</span>' +
+        '<span class="price-note">Incluida con cada pedido · no se vende por separado</span>';
     } else if (v) {
       caja.innerHTML = '<span class="price-value">' + fmt(v) + '</span>' +
-        (C.envio && C.envio.incluido ? '<span class="price-note">Envío incluido a todo Ecuador</span>' : '');
+        (C.envio && C.envio.incluido ? '<span class="price-note">Envío incluido a todo Ecuador</span>' : '') +
+        (regaloAqui ? '<span class="price-gift">+ ' + R.texto + '</span>' : '');
     } else {
       caja.innerHTML = '<span class="price-muted">Precio a consultar</span>';
     }
@@ -72,7 +91,8 @@
     banco: '<path d="M3 9.5 12 4l9 5.5"/><path d="M5 10v7M9.5 10v7M14.5 10v7M19 10v7M3 19.5h18"/>',
     tarjeta: '<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/>',
     efectivo: '<rect x="2.5" y="6.5" width="19" height="11" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/>',
-    whatsapp: '<path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4A8 8 0 1 1 20 12z"/>'
+    whatsapp: '<path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4A8 8 0 1 1 20 12z"/>',
+    regalo: '<rect x="3.5" y="8.5" width="17" height="12" rx="1.5"/><path d="M2.5 8.5h19v4h-19zM12 8.5v12"/><path d="M12 8.5c-1.8-3.6-5.5-3.6-5.5-1.3 0 1.3 2.2 1.3 5.5 1.3zM12 8.5c1.8-3.6 5.5-3.6 5.5-1.3 0 1.3-2.2 1.3-5.5 1.3z"/>'
   };
 
   function seccionEnviosPagos() {
@@ -93,6 +113,7 @@
       '<div class="ship-grid">' +
         tarjeta('envio', 'Envío con ' + (e.empresa || 'courier'), e.incluido ? 'Incluido en el precio, a cualquier ciudad de Ecuador.' : 'A cualquier ciudad de Ecuador.') +
         tarjeta('reloj', 'Entrega en ' + (e.tiempo || 'pocos días'), 'Tiempo estimado desde la confirmación del pago. Recibes la guía de seguimiento de ' + (e.empresa || 'tu envío') + '.') +
+        (hayRegalo() ? tarjeta('regalo', R.texto, 'Incluida gratis en cada pedido de péptidos. No se cobra aparte.') : '') +
         pagos.map(function (x) { return tarjeta(x[0], x[1], x[2]); }).join('') +
       '</div>' +
       '<ol class="ship-steps" aria-label="Cómo hacer tu pedido">' +
