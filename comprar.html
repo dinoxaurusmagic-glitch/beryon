@@ -526,6 +526,31 @@ background-position:58% center !important;
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilo-marca.css">
+<style>
+/* ===== Tienda: precios, envíos, pagos y reseñas ===== */
+.price-display{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin:12px 0 0}
+.price-value{font-family:"Montserrat","Inter",Arial,sans-serif;font-size:26px;font-weight:800;color:#fff;letter-spacing:-.5px}
+.price-note{font-size:12px;font-weight:600;color:#5fd8fb}
+.price-muted{font-size:13px;font-weight:600;color:#9fb6cc}
+.ship-pay,.reviews-google{max-width:1180px;margin:0 auto 46px;padding:0 22px}
+.ship-pay-head,.reviews-google{text-align:center}
+.ship-kicker{font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#5fd8fb;margin-bottom:8px}
+.ship-pay h2,.reviews-google h2{font-size:clamp(24px,3vw,32px);color:#fff;margin-bottom:8px}
+.ship-pay-head p,.reviews-google>p{color:#9fb6cc;font-size:14px;margin-bottom:22px}
+.ship-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.ship-item{padding:20px 18px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.035);text-align:left}
+.ship-item svg{width:30px;height:30px;color:#5fd8fb;margin-bottom:10px}
+.ship-item strong{display:block;color:#fff;font-size:15px;margin-bottom:6px}
+.ship-item span{display:block;font-size:12.5px;line-height:1.55;color:#9fb6cc}
+.ship-steps{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.ship-steps li{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:rgba(95,216,251,.06);border:1px solid rgba(95,216,251,.15);color:#cfe3f1;font-size:12.5px;line-height:1.45}
+.ship-steps strong{flex:0 0 24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#22c4ed,#0789c5);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center}
+.reviews-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.rv-btn{display:inline-flex;align-items:center;min-height:46px;padding:0 20px;border-radius:12px;border:1px solid rgba(95,216,251,.4);color:#cfefff;font-weight:700;text-decoration:none}
+.rv-btn.rv-primary{background:linear-gradient(135deg,#22c4ed,#0789c5);border-color:transparent;color:#fff}
+@media(max-width:820px){.ship-steps{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.ship-steps{grid-template-columns:1fr}.price-value{font-size:23px}}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
@@ -614,7 +639,7 @@ Facebook
     <div class="eyebrow">BERYON · CONSULTAS Y DISPONIBILIDAD</div>
     <h1 id="hero-title">Explora y <span>consulta</span></h1>
     <p>Revisa nuestra selección de moléculas y materiales, accede a su ficha científica y comunícate directamente con BERYON para solicitar información, documentación o disponibilidad.</p>
-    <div class="hero-note">BERYON no muestra precios ni realiza pagos en esta página. La disponibilidad, presentación, estatus regulatorio y condiciones de acceso pueden variar según la molécula y la normativa aplicable en Ecuador.</div>
+    <div class="hero-note">Los precios incluyen el envío a todo Ecuador con Servientrega. Los pedidos se confirman por WhatsApp. La disponibilidad, presentación, estatus regulatorio y condiciones de acceso pueden variar según la molécula y la normativa aplicable en Ecuador.</div>
   </div>
 </section>
 
@@ -1528,8 +1553,9 @@ document.addEventListener("click", function(event){
     const presentation = consultButton.dataset.presentation || "";
 
     const message =
-      "Hola, quisiera consultar disponibilidad de " +
-      product + " " + presentation + " en BERYON.";
+      (window.BERYON_mensajePedido
+        ? window.BERYON_mensajePedido(product, presentation)
+        : "Hola, quisiera consultar disponibilidad de " + product + " " + presentation + " en BERYON.");
 
     const url =
       "https://wa.me/593998833543?text=" +
@@ -1540,6 +1566,8 @@ document.addEventListener("click", function(event){
 
 });
 </script>
+<script src="tienda-config.js"></script>
+<script src="tienda.js"></script>
 <script src="chat.js" defer></script>
 </body>
 </html>
