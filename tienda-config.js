@@ -32,7 +32,9 @@ window.BERYON_TIENDA = {
   envio: {
     empresa: "Servientrega",
     tiempo: "24 a 72 horas hábiles",
-    incluido: true            // el precio ya incluye el envío dentro de Ecuador
+    incluido: false,          // true = el precio ya incluye el envío siempre
+    gratisDesde: 2,           // envío gratis desde esta cantidad de productos (iguales o diferentes)
+    costo: 6                  // costo del envío cuando se compra menos de "gratisDesde"
   },
 
   pagos: {

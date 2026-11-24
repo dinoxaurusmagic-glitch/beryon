@@ -26,6 +26,21 @@
   var R = C.regalo || null;
   function hayRegalo() { return !!(R && R.texto); }
 
+  // Textos de la regla de envío
+  var E = C.envio || {};
+  function envioCorto() {
+    if (E.gratisDesde) return "Envío gratis comprando " + E.gratisDesde + " o más productos";
+    if (E.incluido) return "Envío incluido a todo Ecuador";
+    return "";
+  }
+  function envioDetalle() {
+    if (E.gratisDesde) {
+      return "Envío gratis desde " + E.gratisDesde + " productos (iguales o diferentes)" +
+        (E.costo ? "; con 1 solo producto el envío cuesta " + fmt(E.costo) : "") + ".";
+    }
+    return E.incluido ? "Envío incluido." : "";
+  }
+
   // Mensaje de WhatsApp para pedir un producto
   window.BERYON_mensajePedido = function (producto, presentacion) {
     var v = precio(producto, presentacion);
@@ -38,9 +53,10 @@
     }
     var extra = hayRegalo() && producto !== R.producto ? " + " + R.texto.charAt(0).toLowerCase() + R.texto.slice(1) : "";
     var linea = v
-      ? "Hola, quiero pedir " + producto + " " + presentacion + " (" + fmt(v) + ", envío incluido" + extra + ") en BERYON."
+      ? "Hola, quiero pedir " + producto + " " + presentacion + " (" + fmt(v) + (E.incluido ? ", envío incluido" : "") + extra + ") en BERYON."
       : "Hola, quisiera consultar disponibilidad y precio de " + producto + " " + presentacion + " en BERYON.";
-    return linea + "\n\nCiudad de entrega: \nForma de pago (" + formas.join(" / ") + "): ";
+    return linea + "\n\nCantidad: \nCiudad de entrega: \nForma de pago (" + formas.join(" / ") + "): " +
+      (v && envioDetalle() ? "\n\n" + envioDetalle() : "");
   };
 
   // ---------- Precio en cada tarjeta ----------
@@ -65,7 +81,7 @@
         '<span class="price-note">Incluida con cada pedido · no se vende por separado</span>';
     } else if (v) {
       caja.innerHTML = '<span class="price-value">' + fmt(v) + '</span>' +
-        (C.envio && C.envio.incluido ? '<span class="price-note">Envío incluido a todo Ecuador</span>' : '') +
+        (envioCorto() ? '<span class="price-note">' + envioCorto() + '</span>' : '') +
         (regaloAqui ? '<span class="price-gift">+ ' + R.texto + '</span>' : '');
     } else {
       caja.innerHTML = '<span class="price-muted">Precio a consultar</span>';
@@ -109,11 +125,16 @@
     s.innerHTML =
       '<div class="ship-pay-head"><p class="ship-kicker">Envíos y pagos</p>' +
       '<h2 id="ship-pay-title">Recibe tu pedido en todo Ecuador</h2>' +
-      '<p>' + (e.incluido ? 'El precio publicado ya incluye el envío.' : '') + '</p></div>' +
+      '<p>' + (e.gratisDesde ? 'Envío gratis comprando ' + e.gratisDesde + ' o más productos, iguales o diferentes.'
+              : (e.incluido ? 'El precio publicado ya incluye el envío.' : '')) + '</p></div>' +
       '<div class="ship-grid">' +
-        tarjeta('envio', 'Envío con ' + (e.empresa || 'courier'), e.incluido ? 'Incluido en el precio, a cualquier ciudad de Ecuador.' : 'A cualquier ciudad de Ecuador.') +
+        (e.gratisDesde
+          ? tarjeta('envio', 'Envío gratis desde ' + e.gratisDesde + ' productos',
+              'Con ' + (e.empresa || 'courier') + ' a cualquier ciudad de Ecuador, en compras de ' + e.gratisDesde + ' o más productos iguales o diferentes.' +
+              (e.costo ? ' Si compras 1 solo producto, el envío cuesta ' + fmt(e.costo) + '.' : ''))
+          : tarjeta('envio', 'Envío con ' + (e.empresa || 'courier'), e.incluido ? 'Incluido en el precio, a cualquier ciudad de Ecuador.' : 'A cualquier ciudad de Ecuador.')) +
         tarjeta('reloj', 'Entrega en ' + (e.tiempo || 'pocos días'), 'Tiempo estimado desde la confirmación del pago. Recibes la guía de seguimiento de ' + (e.empresa || 'tu envío') + '.') +
-        (hayRegalo() ? tarjeta('regalo', R.texto, 'Incluida gratis en cada pedido de péptidos. No se cobra aparte.') : '') +
+        (hayRegalo() ? tarjeta('regalo', R.texto, 'Incluida gratis en cada pedido de péptidos. No se cobra aparte' + (e.gratisDesde ? ' ni cuenta para el envío gratis.' : '.')) : '') +
         pagos.map(function (x) { return tarjeta(x[0], x[1], x[2]); }).join('') +
       '</div>' +
       '<ol class="ship-steps" aria-label="Cómo hacer tu pedido">' +
