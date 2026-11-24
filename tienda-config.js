@@ -19,7 +19,7 @@ window.BERYON_TIENDA = {
     "NAD+":                 { "250 mg": 69, "500 mg": 119, "1000 mg": 195 },
     "BPC-157":              { "5 mg": 69,  "10 mg": 109 },
     "TB-500":               { "5 mg": 79,  "10 mg": 109 },
-    "Agua bacteriostática": { "3 mL": "incluida", "10 mL": 25 }
+    "Agua bacteriostática": { "3 mL": "incluida", "10 mL": 13 }
   },
 
   // Regalo con cada pedido ("incluida" en precios = no se vende aparte)
