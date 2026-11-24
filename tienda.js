@@ -35,8 +35,8 @@
   }
   function envioDetalle() {
     if (E.gratisDesde) {
-      return "Envío gratis desde " + E.gratisDesde + " productos (iguales o diferentes)" +
-        (E.costo ? "; con 1 solo producto el envío cuesta " + fmt(E.costo) : "") + ".";
+      return "Envío gratis si tu pedido tiene " + E.gratisDesde + " o más productos (pueden ser diferentes)" +
+        (E.costo ? "; si pides 1 solo producto, el envío cuesta " + fmt(E.costo) : "") + ".";
     }
     return E.incluido ? "Envío incluido." : "";
   }
@@ -81,7 +81,7 @@
         '<span class="price-note">Incluida con cada pedido · no se vende por separado</span>';
     } else if (v) {
       caja.innerHTML = '<span class="price-value">' + fmt(v) + '</span>' +
-        (envioCorto() ? '<span class="price-note">' + envioCorto() + '</span>' : '') +
+        (E.incluido ? '<span class="price-note">' + envioCorto() + '</span>' : '') +
         (regaloAqui ? '<span class="price-gift">+ ' + R.texto + '</span>' : '');
     } else {
       caja.innerHTML = '<span class="price-muted">Precio a consultar</span>';
@@ -125,13 +125,13 @@
     s.innerHTML =
       '<div class="ship-pay-head"><p class="ship-kicker">Envíos y pagos</p>' +
       '<h2 id="ship-pay-title">Recibe tu pedido en todo Ecuador</h2>' +
-      '<p>' + (e.gratisDesde ? 'Envío gratis comprando ' + e.gratisDesde + ' o más productos, iguales o diferentes.'
+      '<p>' + (e.gratisDesde ? 'Envío gratis cuando tu pedido tiene ' + e.gratisDesde + ' o más productos, sean cuales sean.'
               : (e.incluido ? 'El precio publicado ya incluye el envío.' : '')) + '</p></div>' +
       '<div class="ship-grid">' +
         (e.gratisDesde
           ? tarjeta('envio', 'Envío gratis desde ' + e.gratisDesde + ' productos',
-              'Con ' + (e.empresa || 'courier') + ' a cualquier ciudad de Ecuador, en compras de ' + e.gratisDesde + ' o más productos iguales o diferentes.' +
-              (e.costo ? ' Si compras 1 solo producto, el envío cuesta ' + fmt(e.costo) + '.' : ''))
+              'Con ' + (e.empresa || 'courier') + ' a cualquier ciudad de Ecuador cuando tu pedido tiene ' + e.gratisDesde + ' o más productos. Pueden ser diferentes: por ejemplo, Semaglutide + BPC-157.' +
+              (e.costo ? ' Si pides 1 solo producto, el envío cuesta ' + fmt(e.costo) + '.' : ''))
           : tarjeta('envio', 'Envío con ' + (e.empresa || 'courier'), e.incluido ? 'Incluido en el precio, a cualquier ciudad de Ecuador.' : 'A cualquier ciudad de Ecuador.')) +
         tarjeta('reloj', 'Entrega en ' + (e.tiempo || 'pocos días'), 'Tiempo estimado desde la confirmación del pago. Recibes la guía de seguimiento de ' + (e.empresa || 'tu envío') + '.') +
         (hayRegalo() ? tarjeta('regalo', R.texto, 'Incluida gratis en cada pedido de péptidos. No se cobra aparte' + (e.gratisDesde ? ' ni cuenta para el envío gratis.' : '.')) : '') +
