@@ -7,19 +7,19 @@
 window.BERYON_TIENDA = {
 
   precios: {
-    "Semaglutide":          { "5 mg": null, "10 mg": null, "15 mg": null, "20 mg": null },
-    "Tirzepatide":          { "10 mg": null, "20 mg": null, "30 mg": null, "40 mg": null, "60 mg": null },
-    "Retatrutide":          { "10 mg": null, "20 mg": null, "30 mg": null },
-    "MOTS-c":               { "10 mg": null, "40 mg": null },
-    "GHK-Cu":               { "50 mg": null, "100 mg": null },
-    "Ipamorelin":           { "5 mg": null, "10 mg": null },
-    "Tesamorelin":          { "5 mg": null, "10 mg": null },
-    "Semax":                { "5 mg": null, "10 mg": null },
-    "Selank":               { "10 mg": null, "30 mg": null },
-    "NAD+":                 { "250 mg": null, "500 mg": null, "1000 mg": null },
-    "BPC-157":              { "5 mg": null, "10 mg": null },
-    "TB-500":               { "5 mg": null, "10 mg": null },
-    "Agua bacteriostática": { "3 mL": null, "10 mL": null }
+    "Semaglutide":          { "5 mg": 85,  "10 mg": 125, "15 mg": 159, "20 mg": 185 },
+    "Tirzepatide":          { "10 mg": 149, "20 mg": 225, "30 mg": 289, "40 mg": 339, "60 mg": 459 },
+    "Retatrutide":          { "10 mg": 169, "20 mg": 289, "30 mg": 315 },
+    "MOTS-c":               { "10 mg": 105, "40 mg": 279 },
+    "GHK-Cu":               { "50 mg": 89,  "100 mg": 129 },
+    "Ipamorelin":           { "5 mg": 59,  "10 mg": 99 },
+    "Tesamorelin":          { "5 mg": 79,  "10 mg": 135 },
+    "Semax":                { "5 mg": 55,  "10 mg": 82 },
+    "Selank":               { "10 mg": 75, "30 mg": 159 },
+    "NAD+":                 { "250 mg": 69, "500 mg": 119, "1000 mg": 195 },
+    "BPC-157":              { "5 mg": 69,  "10 mg": 109 },
+    "TB-500":               { "5 mg": 79,  "10 mg": 109 },
+    "Agua bacteriostática": { "3 mL": 12,  "10 mL": 25 }
   },
 
   envio: {
