@@ -583,5 +583,6 @@ const mobileButton=document.getElementById("mobileButton"),menu=document.getElem
 if(mobileButton&&menu){mobileButton.addEventListener("click",()=>{const open=menu.classList.toggle("open");mobileButton.setAttribute("aria-expanded",String(open));mobileButton.textContent=open?"✕":"☰";});menu.querySelectorAll("a").forEach(link=>link.addEventListener("click",()=>{menu.classList.remove("open");mobileButton.setAttribute("aria-expanded","false");mobileButton.textContent="☰";}));}
 </script>
 
+<script src="aviso-edad.js" defer></script>
 <script src="chat.js" defer></script>
 </body></html>
